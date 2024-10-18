@@ -1,0 +1,329 @@
+.homepage {
+    text-align: center;
+    margin-top: 0;
+  }
+  
+  .header-content {
+    background-image: url('@/assets/image1.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 90px 30px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
+  }
+  
+  h1,
+  p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .services-container {
+    overflow-x: auto;
+    padding: 0 10px;
+    white-space: nowrap;
+  }
+  
+  .services {
+    display: inline-flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .service-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+    text-decoration: none;
+  }
+  
+  .service-button i {
+    font-size: 20px;
+  }
+  
+  .service-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .about-us,
+  .our-services,
+  .testimonials,
+  .contact-us {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    text-align: left;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+  }
+  
+  .services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+  }
+  
+  .service-item {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .service-item i {
+    font-size: 30px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .service-item:hover {
+    transform: translateY(-10px);
+  }
+  
+  .testimonial-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .testimonial-item {
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  /* Style pour la section du formulaire de contact */
+  .contact-form-section {
+    background-color: #f9f9f9;
+    padding: 50px 20px;
+  }
+  
+  .contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .contact-form-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  /* Style pour la section footer */
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    font-size: 0.9rem;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+  
+  .footer-about,
+  .footer-links,
+  .footer-contact,
+  .footer-social {
+    flex: 1 1 200px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-about h4,
+  .footer-links h4,
+  .footer-contact h4,
+  .footer-social h4 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+  
+  .footer-about p {
+    line-height: 1.6;
+  }
+  
+  .footer-links ul,
+  .footer-contact ul,
+  .footer-social ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links ul li,
+  .footer-contact ul li,
+  .footer-social ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-links ul li a,
+  .footer-contact ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .footer-links ul li a:hover,
+  .footer-contact ul li a:hover {
+    color: #007bff;
+  }
+  
+  .footer-contact ul li i {
+    margin-right: 10px;
+  }
+  
+  .footer-social ul {
+    display: flex;
+  }
+  
+  .footer-social ul li {
+    margin-right: 10px;
+  }
+  
+  .footer-social ul li a {
+    color: #fff;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  
+  .footer-social ul li a:hover {
+    color: #007bff;
+  }
+  
+  .footer-bottom {
+    background-color: #222;
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  
+  }
+  
+  @media (max-width: 768px) {
+    .services-list {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .service-item {
+      max-width: 90%;
+    }
+  
+    .testimonial-list {
+      padding: 0 10px;
+    }
+  }
+  
+  .departures-alert {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .departures-button {
+    background-color: #ff5733; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 15px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: blink 1s infinite alternate; /* Animation clignotante */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre portée */
+  }
+  
+  .departures-button i {
+    font-size: 24px;
+  }
+  
+  @keyframes blink {
+    0% {
+      background-color: #09ad48; /* Couleur de départ */
+      transform: scale(1);
+    }
+    50% {
+      background-color: #ffcc00; /* Couleur intermédiaire */
+      transform: scale(1.05); /* Légère augmentation de taille */
+    }
+    100% {
+      background-color: #ff5733; /* Retour à la couleur de départ */
+      transform: scale(1);
+    }
+  }
+
+  
+  

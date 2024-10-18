@@ -1,0 +1,90 @@
+.header_section {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+}
+
+.contact_nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.contact_nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* Centre verticalement le logo */
+}
+
+.navbar-nav .nav-item {
+  margin-right: 20px;
+}
+
+.nav_search-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.btn-danger {
+  color: white;
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.navbar-toggler {
+  font-size: 24px;
+  border: none;
+  background-color: transparent;
+}
+
+.navbar-toggler-icon {
+  font-size: 24px;
+  color: #333;
+}
+
+.logo {
+  height: 50px; /* Ajustez la hauteur selon vos besoins */
+  width: auto;  /* Conserve les proportions du logo */
+  /*margin-right: 40px;  Espace entre le logo et les éléments "Besoins" et "Offres" */
+}
+
+/* Styles spécifiques pour aligner "Besoins" et "Offres" au centre */
+.d-flex {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item .nav-link {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: 10px; /* Espace entre "Besoins" et "Offres" */
+}
+
+.navbar-expand-lg .custom_nav-container {
+  display: flex;
+  justify-content: space-between; /* Assure un espacement entre le logo, "Besoins/Offres" et le reste du menu */
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  /* Assure que Besoins et Offres restent bien centrés sur les petits écrans */
+  .navbar-collapse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-item .nav-link {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+}
