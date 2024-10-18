@@ -20,6 +20,7 @@ import OffreForm from '@/components/OffreForm.vue';
 import PasswordResetRequest from '@/components/PasswordResetRequest.vue';
 import PasswordResetConfirm from '@/components/PasswordResetConfirm.vue';
 import VerifyEmail from '@/components/VerifyEmail.vue';
+import PubliciteAnnonce from '@/components/PubliciteAnnonce.vue';
 
 
 const routes = [
@@ -100,6 +101,11 @@ const routes = [
     path: '/verify-email/:token',
     name: 'VerifyEmail',
     component: VerifyEmail,
+  },
+  {
+    path: '/publicite',
+    name: 'PubliciteAnnonce',
+    component: PubliciteAnnonce
   },
 
 ];

@@ -6,7 +6,7 @@
       <p>Explorez nos services et profitez d'une expérience unique.</p>
     </div>
 
-    <!-- Section des services -->
+    
     <div class="services-container">
       <div class="services">
         <router-link to="/compagnies" class="service-button">
@@ -21,9 +21,10 @@
         <router-link to="/agences" class="service-button">
           <i class="fas fa-ticket-alt"></i> Agence de Vente de Billets
         </router-link>
-        <router-link to="/programmes" class="service-button">
-          <i class="fas fa-calendar-check"></i> Programmes en Cours (GP)
-        </router-link>
+        <router-link to="/publicite" class="service-button">
+          <i class="fas fa-bullhorn"></i> Publicité Bientôt Disponible
+      </router-link>
+      
       </div>
     </div>
 
@@ -175,5 +176,26 @@
 
   </div>
 </template>
+
+<script>
+
+export default {
+  mounted() {
+    const servicesContainer = this.$el.querySelector('.services-container');
+    
+    // Arrête le défilement si l'utilisateur survole la section
+    servicesContainer.addEventListener('mouseover', () => {
+      servicesContainer.querySelector('.services').style.animationPlayState = 'paused';
+    });
+
+    // Relance le défilement lorsque l'utilisateur ne survole plus
+    servicesContainer.addEventListener('mouseout', () => {
+      servicesContainer.querySelector('.services').style.animationPlayState = 'running';
+    });
+  }
+};
+
+
+</script>
 
 <style scoped src="@/styles/home.css"></style>

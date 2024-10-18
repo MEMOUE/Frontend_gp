@@ -325,5 +325,38 @@
     }
   }
 
+  .services-container {
+    display: flex;
+    overflow: hidden; /* Cache les éléments qui débordent */
+    white-space: nowrap; /* Empêche le retour à la ligne */
+  }
   
+  .services {
+    display: flex;
+    animation: scroll 25s linear infinite; /* Animation continue de défilement */
+  }
+  
+  .service-button {
+    display: inline-block;
+    padding: 10px;
+    margin: 0 15px;
+    white-space: nowrap; /* Empêche le texte de se renvoyer à la ligne */
+  }
+  
+  /* Duplique les éléments pour permettre un défilement fluide */
+  .services::before,
+  .services::after {
+    content: attr(data-duplicate);
+    display: inline-block;
+    white-space: nowrap;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0); /* Commence au début de la liste */
+    }
+    100% {
+      transform: translateX(-100%); /* Défile jusqu'à la fin de la première partie des boutons */
+    }
+  }
   

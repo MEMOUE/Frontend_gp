@@ -6,7 +6,6 @@
         <h1>GPMonde</h1>
       </div>
       <div class="notification-icon" @click="toggleNotifications" aria-label="Notifications">
-        <!-- Afficher l'icône d'œil ouvert si les notifications sont affichées, sinon afficher l'œil barré -->
         <i v-if="showNotifications" class="fas fa-eye"></i>
         <i v-else class="fas fa-eye-slash"></i>
         <span v-if="unreadCount > 0" class="notification-count">{{ unreadCount }}</span>
@@ -28,22 +27,19 @@
 
     <!-- Notifications -->
     <div v-if="showNotifications" class="notifications">
-      <h3>Nouvelles Notifications ({{ newNotifications.length }})</h3>
-      <ul v-if="newNotifications.length > 0">
-        <li v-for="notification in newNotifications" :key="notification.id" @click="markNotificationAsRead(notification)">
-          {{ notification.message }} - {{ new Date(notification.created_at).toLocaleString() }}
+      <h3>Notifications ({{ notifications.length }})</h3>
+      <ul v-if="notifications.length > 0">
+        <li v-for="notification in notifications" :key="notification.id" 
+            :class="{ 'read': notification.is_read }"
+            @click="markNotificationAsRead(notification)">
+          {{ notification.message }} 
         </li>
       </ul>
-      <h3>Notifications Déjà Vues ({{ oldNotifications.length }})</h3>
-      <ul v-if="oldNotifications.length > 0">
-        <li v-for="notification in oldNotifications" :key="notification.id">
-          {{ notification.message }} - {{ new Date(notification.created_at).toLocaleString() }}
-        </li>
-      </ul>
-      <p v-else>Aucune nouvelle notification</p>
+      <p v-else>Aucune notification</p>
     </div>
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -57,7 +53,7 @@ export default {
       apiUrl: 'http://localhost:8000/api', // URL de l'API
       notifications: [],
       unreadCount: 0,
-      showNotifications: false,
+      showNotifications: true, // Afficher les notifications par défaut
       newNotifications: [],
       oldNotifications: [],
     };
@@ -146,10 +142,6 @@ export default {
         .catch(error => {
           console.error('Erreur lors du marquage de la notification comme lue :', error);
         });
-    },
-    checkIfUserIsConnected() {
-      // Logique pour vérifier si l'utilisateur est connecté
-      return localStorage.getItem('authToken') !== null; 
     },
   },
 };

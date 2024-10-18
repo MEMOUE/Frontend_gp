@@ -2,7 +2,7 @@
   <div class="container mt-4">
     <h1>Compagnies de Transport</h1>
     <!-- <button v-if="userId" @click="addCompagnie" class="btn btn-primary mb-3">Ajouter Compagnie</button> -->
-    <button v-if="userId" @click="addCompagnie" class="btn btn-primary mb-3">Ajouter Compagnie</button>
+    <button  @click="addCompagnie" class="btn btn-primary mb-3">Ajouter Compagnie</button>
     <div class="row">
       <div v-for="compagnie in compagnies" :key="compagnie.id" class="col-md-4 mb-3">
         <div class="card shadow-sm">
