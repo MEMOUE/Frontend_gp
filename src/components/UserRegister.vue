@@ -25,7 +25,7 @@
       </div>
       <button type="submit" class="submit-btn">S'inscrire</button>
       <p v-if="error" class="error-message">{{ error }}</p>
-      <h3 v-if="message" class="success-message">{{ message }}</h3>
+      <!-- <h3 v-if="message" class="success-message">{{ message }}</h3> -->
       <p class="login-link">
         Déjà inscrit ? <router-link to="/login">Connectez-vous ici</router-link>
       </p>
