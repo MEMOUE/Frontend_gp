@@ -4,12 +4,14 @@
     <header class="header_section">
       <div class="header_top bg-info">
         <div class="container-fluid">
-          <div class="contact_nav">
+          <div class="contact_nav d-flex justify-content-between">
             <a href="tel:+221784886752">
               <i class="fa fa-phone" aria-hidden="true"></i>
+              
             </a>
             <a href="mailto:memko021@gmail.com">
               <i class="fa fa-envelope" aria-hidden="true"></i>
+              
             </a>
             <a href="#">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -32,13 +34,13 @@
               <li class="nav-item mx-2">
                 <a class="nav-link text-danger" href="/besoin-notifications">
                   <i class="fas fa-bell"></i> Besoins
-                  <span class="badge bg-danger">{{ activeBesoinsCount }}</span>
+                  <span class="badge bg-danger">{{ activeBesoinsCount }}</span> <!-- Compteur d'offres actives -->
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-success" href="/offres">
                   <i class="fas fa-briefcase"></i> Offres
-                  <span class="badge bg-success">{{ activeOffersCount }}</span>
+                  <span class="badge bg-success">{{ activeOffersCount }}</span> <!-- Compteur d'offres actives -->
                 </a>
               </li>
             </div>
@@ -85,29 +87,30 @@
         </div>
       </div>
     </header>
+    <!-- Header Section End -->
   </div>
 </template>
 
 <script>
-import logo from '@/assets/logo_sbg.png'; 
-import axios from 'axios';
+import logo from '@/assets/logo_sbg.png'; // Importer le logo
+import axios from 'axios'; // Assurez-vous d'installer axios si ce n'est pas fait.
 
 export default {
   name: "HeaderComponent",
   data() {
     return {
-      logo,
-      activeOffersCount: 0,
+      logo, // Définir le logo dans les données
+      activeOffersCount: 0, // Initialiser à 0
       activeBesoinsCount: 0,
     };
   },
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.user; // Gestion de l'état de l'utilisateur
     },
   },
   mounted() {
-    this.fetchActiveOffersCount();
+    this.fetchActiveOffersCount(); // Appel de l'API au montage du composant
   },
   methods: {
     async fetchActiveOffersCount() {
@@ -122,12 +125,12 @@ export default {
       }
     },
     goToProfile() {
-      this.$router.push('/profile');
+      this.$router.push('/profile'); // Redirection vers la page de profil
     },
     async logout() {
       try {
-        await this.$store.dispatch('logout');
-        this.$router.push('/login');
+        await this.$store.dispatch('logout'); // Appel Vuex pour la déconnexion
+        this.$router.push('/login'); // Redirection vers la page de connexion après la déconnexion
       } catch (error) {
         console.error('Déconnexion échouée:', error);
       }
@@ -136,4 +139,5 @@ export default {
 };
 </script>
 
+<!-- Liens vers le fichier CSS externe -->
 <style scoped src="@/styles/header.css"></style>

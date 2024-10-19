@@ -54,10 +54,8 @@
 .logo {
   height: 50px; /* Ajustez la hauteur selon vos besoins */
   width: auto;  /* Conserve les proportions du logo */
-  /*margin-right: 40px;  Espace entre le logo et les éléments "Besoins" et "Offres" */
 }
 
-/* Styles spécifiques pour aligner "Besoins" et "Offres" au centre */
 .d-flex {
   display: flex;
   align-items: center;
