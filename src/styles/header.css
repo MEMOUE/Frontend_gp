@@ -76,7 +76,12 @@
 @media (max-width: 992px) {
   /* Assure que Besoins et Offres restent bien centrés sur les petits écrans */
   .navbar-collapse {
-    display: flex;
+    display: none; /* Cache le menu par défaut */
+  }
+  .navbar-collapse.show {
+    display: flex; /* Affiche le menu lorsque la classe 'show' est présente */
+  }
+  .navbar-collapse {
     flex-direction: column;
     align-items: center;
   }

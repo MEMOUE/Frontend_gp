@@ -7,11 +7,9 @@
           <div class="contact_nav d-flex justify-content-between">
             <a href="tel:+221784886752">
               <i class="fa fa-phone" aria-hidden="true"></i>
-              
             </a>
             <a href="mailto:memko021@gmail.com">
               <i class="fa fa-envelope" aria-hidden="true"></i>
-              
             </a>
             <a href="#">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -34,13 +32,13 @@
               <li class="nav-item mx-2">
                 <a class="nav-link text-danger" href="/besoin-notifications">
                   <i class="fas fa-bell"></i> Besoins
-                  <span class="badge bg-danger">{{ activeBesoinsCount }}</span> <!-- Compteur d'offres actives -->
+                  <span class="badge bg-danger">{{ activeBesoinsCount }}</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-success" href="/offres">
                   <i class="fas fa-briefcase"></i> Offres
-                  <span class="badge bg-success">{{ activeOffersCount }}</span> <!-- Compteur d'offres actives -->
+                  <span class="badge bg-success">{{ activeOffersCount }}</span>
                 </a>
               </li>
             </div>
@@ -111,6 +109,10 @@ export default {
   },
   mounted() {
     this.fetchActiveOffersCount(); // Appel de l'API au montage du composant
+    document.addEventListener('click', this.handleClickOutside);
+  },
+  beforeUnmount() { // Changer ici de beforeDestroy à beforeUnmount
+    document.removeEventListener('click', this.handleClickOutside);
   },
   methods: {
     async fetchActiveOffersCount() {
@@ -133,6 +135,15 @@ export default {
         this.$router.push('/login'); // Redirection vers la page de connexion après la déconnexion
       } catch (error) {
         console.error('Déconnexion échouée:', error);
+      }
+    },
+    handleClickOutside(event) {
+      const target = event.target;
+      const navbar = document.getElementById('navbarSupportedContent');
+      
+      // Vérifiez si le clic est en dehors de la barre de navigation
+      if (navbar && !navbar.contains(target) && !target.matches('.navbar-toggler')) {
+        navbar.classList.remove('show'); // Ferme le menu
       }
     }
   }
