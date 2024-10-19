@@ -50,7 +50,7 @@ export default {
       message: '',
       successMessage: '',
       errorMessage: '',
-      apiUrl: 'http://localhost:8000/api', // URL de l'API
+      apiUrl: 'https://memko.pythonanywhere.com/api', // URL de l'API
       notifications: [],
       unreadCount: 0,
       showNotifications: true, // Afficher les notifications par défaut

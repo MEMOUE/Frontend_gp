@@ -1,0 +1,11 @@
+{
+    "https_only": true,
+    "redirects": [
+      {
+        "source": "/(.*)",
+        "destination": "https://www.gpmonde.com/$1",
+        "type": 301
+      }
+    ]
+  }
+  

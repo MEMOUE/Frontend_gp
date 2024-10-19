@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8000/',  
+  baseURL: 'https://memko.pythonanywhere.com/',  
   headers: {
     'Content-Type': 'application/json',
   },
@@ -58,7 +58,7 @@ instance.interceptors.response.use(
 
       if (refreshToken) {
         try {
-          const response = await axios.post('http://localhost:8000/api/token/refresh/', {
+          const response = await axios.post('https://memko.pythonanywhere.com/', {
             refresh: refreshToken,
           });
 
