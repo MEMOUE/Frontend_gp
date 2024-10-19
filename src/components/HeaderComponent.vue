@@ -113,10 +113,10 @@ export default {
   methods: {
     async fetchActiveOffersCount() {
       try {
-        const responseBesoins = await axios.get('http://localhost:8000/api/besoins-actives/');
+        const responseBesoins = await axios.get('https://memko.pythonanywhere.com/api/besoins-actives/');
         this.activeBesoinsCount = responseBesoins.data.count;
 
-        const responseOffres = await axios.get('http://localhost:8000/api/offres-actives/');
+        const responseOffres = await axios.get('https://memko.pythonanywhere.com/api/offres-actives/');
         this.activeOffersCount = responseOffres.data.count;
       } catch (error) {
         console.error('Erreur lors de la récupération des offres actives:', error);
