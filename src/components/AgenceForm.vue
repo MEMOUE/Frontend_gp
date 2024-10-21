@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-4">
-    <h2>{{ isEditing ? 'Modifier' : 'Ajouter' }} une Agence de Vente de Billets</h2>
+    <h5>{{ isEditing ? 'Modifier' : 'Ajouter' }} une Agence de Vente de Billets</h5>
     <form @submit.prevent="submitForm">
       <div class="mb-3">
         <label for="nom" class="form-label">Nom</label>
@@ -12,7 +12,7 @@
       </div>
       <div class="mb-3">
         <label for="telephone" class="form-label">Téléphone</label>
-        <input type="tel" v-model="agence.telephone" class="form-control" id="telephone" required />
+        <input type="tel" v-model="agence.telephone" class="form-control" id="telephone" placeholder="+XXX 12345678" required />
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
@@ -24,7 +24,7 @@
       </div>
       <div class="mb-3">
         <label for="url" class="form-label">URL du site web</label>
-        <input type="url" v-model="agence.url" class="form-control" id="url"  />
+        <input type="url" v-model="agence.url" class="form-control" id="url" />
       </div>
       <div class="mb-3">
         <label for="logo" class="form-label">Logo</label>
@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import axios from '../axios'; // Assurez-vous d'avoir configuré axios
+import axios from '../axios';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -56,20 +57,25 @@ export default {
   },
   methods: {
     async fetchAgence() {
-      const id = this.$route.params.id; // ID passé via les paramètres de route
+      const id = this.$route.params.id;
       try {
         const response = await axios.get(`/api/agences/${id}/`);
         this.agence = response.data;
         this.isEditing = true;
       } catch (error) {
-        console.error("Erreur lors de la récupération de l'agence", error);
-        alert("Impossible de récupérer les données de l'agence.");
+        this.handleError("Impossible de récupérer les données de l'agence.");
       }
     },
     handleFileUpload(event) {
-      this.agence.logo = event.target.files[0]; // Gestion du fichier
+      this.agence.logo = event.target.files[0];
     },
     async submitForm() {
+      // Check if telephone has at least 8 digits including country code
+      const telephonePattern = /^\+\d{1,3}\d{8,}$/; // Example pattern: +12345678901
+      if (!telephonePattern.test(this.agence.telephone)) {
+        return this.handleError("Le numéro de téléphone doit contenir au moins 8 chiffres avec le code du pays.");
+      }
+
       const formData = new FormData();
       for (const key in this.agence) {
         formData.append(key, this.agence[key]);
@@ -80,23 +86,25 @@ export default {
           await axios.put(`/api/agences/${this.$route.params.id}/`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Agence modifiée avec succès !');
+          Swal.fire('Succès', 'Agence modifiée avec succès !', 'success');
         } else {
           await axios.post('/api/agences/', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Agence ajoutée avec succès !');
+          Swal.fire('Succès', 'Agence ajoutée avec succès !', 'success');
         }
-        this.$router.push('/agences'); // Redirection après succès
+        this.$router.push('/agences');
       } catch (error) {
-        console.error("Erreur lors de l'enregistrement de l'agence", error);
-        alert("Une erreur s'est produite lors de l'enregistrement de l'agence.");
+        this.handleError("Une erreur s'est produite lors de l'enregistrement de l'agence.");
       }
+    },
+    handleError(message) {
+      Swal.fire('Erreur', message, 'error');
     },
   },
   created() {
     if (this.$route.params.id) {
-      this.fetchAgence(); // Récupérer les données si on édite
+      this.fetchAgence();
     }
   },
 };

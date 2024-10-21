@@ -20,7 +20,7 @@
       </div>
       <div class="mb-3">
         <label for="url" class="form-label">URL du site web</label>
-        <input type="url" v-model="transporteur.url" class="form-control" id="url"  />
+        <input type="url" v-model="transporteur.url" class="form-control" id="url" />
       </div>
       <div class="mb-3">
         <label for="pays" class="form-label">Pays</label>
@@ -45,6 +45,7 @@
 
 <script>
 import axios from '../axios'; // Assurez-vous d'avoir configuré axios
+import Swal from 'sweetalert2'; // Importer SweetAlert2
 
 export default {
   data() {
@@ -58,7 +59,6 @@ export default {
         type_transport: 'terrestre',
         url: '',
         logo: null,
-
       },
       isEditing: false,
     };
@@ -82,13 +82,19 @@ export default {
         this.isEditing = true;
       } catch (error) {
         console.error("Erreur lors de la récupération du transporteur", error);
-        alert("Impossible de récupérer les données du transporteur.");
+        Swal.fire("Erreur", "Impossible de récupérer les données du transporteur.", "error");
       }
     },
     handleFileUpload(event) {
       this.transporteur.logo = event.target.files[0]; // Gestion du fichier
     },
     async submitForm() {
+      // Vérifier que le numéro de téléphone contient au moins 8 chiffres
+      if (!/^\+\d{1,3}\d{8,}$/.test(this.transporteur.telephone)) {
+        Swal.fire("Erreur", "Le numéro de téléphone doit contenir au moins 8 chiffres avec le code du pays.", "error");
+        return;
+      }
+
       const formData = new FormData();
       for (const key in this.transporteur) {
         formData.append(key, this.transporteur[key]);
@@ -99,17 +105,17 @@ export default {
           await axios.put(`/api/transporteurs/${this.$route.params.id}/`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Transporteur modifié avec succès !');
+          Swal.fire("Succès", "Transporteur modifié avec succès !", "success");
         } else {
           await axios.post('/api/transporteurs/', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Transporteur ajouté avec succès !');
+          Swal.fire("Succès", "Transporteur ajouté avec succès !", "success");
         }
         this.$router.push('/transporteurs'); // Redirection après succès
       } catch (error) {
         console.error("Erreur lors de l'enregistrement du transporteur", error);
-        alert("Une erreur s'est produite lors de l'enregistrement du transporteur.");
+        Swal.fire("Erreur", "Une erreur s'est produite lors de l'enregistrement du transporteur.", "error");
       }
     },
   },

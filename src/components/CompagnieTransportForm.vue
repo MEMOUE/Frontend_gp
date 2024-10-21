@@ -4,7 +4,6 @@
     <form @submit.prevent="submitForm">
       <div class="mb-3" v-for="(value, key) in compagnie" :key="key">
         <label :for="key" class="form-label">{{ capitalizeFirstLetter(key) }}</label>
-        <!-- Condition pour afficher les champs texte, email, téléphone, et url -->
         <input
           v-if="key === 'nom' || key === 'adresse' || key === 'telephone' || key === 'email' || key === 'pays' || key === 'url'"
           :type="key === 'email' ? 'email' : key === 'telephone' ? 'tel' : key === 'url' ? 'url' : 'text'"
@@ -13,20 +12,19 @@
           :id="key"
           required
         />
-        <!-- Champ pour le téléchargement du logo -->
         <input v-if="key === 'logo'" type="file" @change="handleFileUpload" class="form-control" id="logo" />
       </div>
       <button type="submit" class="btn btn-primary">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
       <div v-if="loading" class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden">Chargement...</span>
       </div>
     </form>
   </div>
 </template>
 
-
 <script>
-import axios from '../axios'; // Assurez-vous que axios est correctement configuré
+import axios from '../axios';
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -50,22 +48,32 @@ export default {
     },
     async fetchCompagnie() {
       this.loading = true;
-      const id = this.$route.params.id; // Assuming you're passing the ID via route params
+      const id = this.$route.params.id;
       try {
         const response = await axios.get(`/api/compagnies/${id}/`);
         this.compagnie = response.data;
         this.isEditing = true;
       } catch (error) {
-        console.error("Erreur lors de la récupération de la compagnie", error);
-        alert("Impossible de récupérer les données de la compagnie.");
+        this.handleError(error, "Impossible de récupérer les données de la compagnie.");
       } finally {
         this.loading = false;
       }
     },
     handleFileUpload(event) {
-      this.compagnie.logo = event.target.files[0]; // Gestion du fichier
+      this.compagnie.logo = event.target.files[0];
+    },
+    validateForm() {
+      // Validation pour le numéro de téléphone
+      const phoneRegex = /^(\+\d{1,3})?\d{8,}$/; // Vérifie que le numéro de téléphone commence par un code de pays optionnel et contient au moins 8 chiffres
+      if (!phoneRegex.test(this.compagnie.telephone)) {
+        Swal.fire('Erreur de validation', 'Le numéro de téléphone doit contenir au moins 8 chiffres, incluant le code du pays.', 'warning');
+        return false;
+      }
+      return true;
     },
     async submitForm() {
+      if (!this.validateForm()) return; // Appel à la méthode de validation
+
       this.loading = true;
       const formData = new FormData();
       Object.keys(this.compagnie).forEach((key) => {
@@ -77,25 +85,35 @@ export default {
           await axios.put(`/api/compagnies/${this.$route.params.id}/`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Compagnie modifiée avec succès !');
+          Swal.fire('Succès', 'Compagnie modifiée avec succès !', 'success');
         } else {
           await axios.post('/api/compagnies/', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Compagnie ajoutée avec succès !');
+          Swal.fire('Succès', 'Compagnie ajoutée avec succès !', 'success');
         }
-        this.$router.push('/compagnies'); // Redirection après succès
+        this.$router.push('/compagnies');
       } catch (error) {
-        console.error("Erreur lors de l'enregistrement de la compagnie", error);
-        alert("Une erreur s'est produite lors de l'enregistrement de la compagnie.");
+        this.handleError(error, "Une erreur s'est produite lors de l'enregistrement de la compagnie.");
       } finally {
         this.loading = false;
       }
     },
+    handleError(error, defaultMessage) {
+      let message = defaultMessage;
+      if (error.response) {
+        if (error.response.status === 400) {
+          message = error.response.data.message || 'Requête invalide. Veuillez vérifier les champs.';
+        } else if (error.response.status === 500) {
+          message = "Erreur interne du serveur. Veuillez réessayer plus tard.";
+        }
+      }
+      Swal.fire('Erreur', message, 'error');
+    }
   },
   created() {
     if (this.$route.params.id) {
-      this.fetchCompagnie(); // Récupérer les données si on édite
+      this.fetchCompagnie();
     }
   },
 };

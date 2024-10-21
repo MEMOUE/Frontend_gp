@@ -28,7 +28,7 @@
       </div>
       <div class="mb-3">
         <label for="telephone" class="form-label">Téléphone</label>
-        <input type="tel" v-model="programmeVoyage.telephone" class="form-control" id="telephone" />
+        <input type="tel" v-model="programmeVoyage.telephone" class="form-control" placeholder="+XXX 12345678" id="telephone" required />
       </div>
       <div class="mb-3">
         <label for="logo" class="form-label">Logo</label>
@@ -41,6 +41,7 @@
 
 <script>
 import axios from '../axios'; // Assurez-vous d'avoir configuré axios
+import Swal from 'sweetalert2';
 
 export default {
   data() {
@@ -58,16 +59,6 @@ export default {
       isEditing: false,
     };
   },
-  watch: {
-    id: {
-      immediate: true,
-      handler(newId) {
-        if (newId) {
-          this.fetchProgrammeVoyage(); // Fetch programme details when the ID changes
-        }
-      },
-    },
-  },
   methods: {
     async fetchProgrammeVoyage() {
       const id = this.$route.params.id; // Assuming you're passing the ID via route params
@@ -77,13 +68,22 @@ export default {
         this.isEditing = true;
       } catch (error) {
         console.error("Erreur lors de la récupération du programme de voyage", error);
-        alert("Impossible de récupérer les données du programme de voyage.");
+        Swal.fire("Erreur", "Impossible de récupérer les données du programme de voyage.", "error");
       }
     },
     handleFileUpload(event) {
       this.programmeVoyage.logo = event.target.files[0]; // Gestion du fichier
     },
+    validateTelephone() {
+      const phonePattern = /^\+\d{1,3}\d{8,}$/; // Regex for country code + 8 digits
+      return phonePattern.test(this.programmeVoyage.telephone);
+    },
     async submitForm() {
+      if (!this.validateTelephone()) {
+        Swal.fire("Erreur", "Le numéro de téléphone doit contenir au moins 8 chiffres avec le code du pays.", "error");
+        return;
+      }
+
       const formData = new FormData();
       for (const key in this.programmeVoyage) {
         formData.append(key, this.programmeVoyage[key]);
@@ -94,17 +94,17 @@ export default {
           await axios.put(`/api/programmes/${this.$route.params.id}/`, formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Programme de voyage modifié avec succès !');
+          Swal.fire("Succès", "Programme de voyage modifié avec succès !", "success");
         } else {
           await axios.post('/api/programmes/', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
           });
-          alert('Programme de voyage ajouté avec succès !');
+          Swal.fire("Succès", "Programme de voyage ajouté avec succès !", "success");
         }
         this.$router.push('/programmes'); // Redirection après succès
       } catch (error) {
         console.error("Erreur lors de l'enregistrement du programme de voyage", error);
-        alert("Une erreur s'est produite lors de l'enregistrement du programme de voyage.");
+        Swal.fire("Erreur", "Une erreur s'est produite lors de l'enregistrement du programme de voyage.", "error");
       }
     },
   },
