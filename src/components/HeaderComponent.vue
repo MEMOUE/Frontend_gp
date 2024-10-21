@@ -30,15 +30,15 @@
             <!-- Centered Besoins and Offres Section -->
             <div class="d-flex align-items-center">
               <li class="nav-item mx-1">
-                <a class="nav-link text-danger" href="/besoin-notifications">
-                  <i class="fas fa-bell"></i> Besoins
-                  <span class="badge bg-danger">{{ activeBesoinsCount }}</span>
+                <a class="nav-link text-danger" href="/besoin-notifications" style="font-size: 0.9rem;">
+                  <i class="fas fa-bell" style="font-size: 1rem;"></i> Besoins
+                  <span class="badge bg-danger" style="font-size: 0.8rem;">{{ activeBesoinsCount }}</span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-success" href="/offres">
-                  <i class="fas fa-briefcase"></i> Offres
-                  <span class="badge bg-success">{{ activeOffersCount }}</span>
+                <a class="nav-link text-success" href="/offres" style="font-size: 0.9rem;">
+                  <i class="fas fa-briefcase" style="font-size: 1rem;"></i> Offres
+                  <span class="badge bg-success" style="font-size: 0.8rem;">{{ activeOffersCount }}</span>
                 </a>
               </li>
             </div>
