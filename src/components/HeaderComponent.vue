@@ -29,7 +29,7 @@
 
             <!-- Centered Besoins and Offres Section -->
             <div class="d-flex align-items-center">
-              <li class="nav-item mx-2">
+              <li class="nav-item mx-1">
                 <a class="nav-link text-danger" href="/besoin-notifications">
                   <i class="fas fa-bell"></i> Besoins
                   <span class="badge bg-danger">{{ activeBesoinsCount }}</span>
