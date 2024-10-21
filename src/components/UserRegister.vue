@@ -1,7 +1,8 @@
 <template>
   <div class="register">
-    <h3 v-if="message" class="success-message">{{ message }}</h3>
+    <!-- Section du titre -->
     <h1>Inscription</h1>
+    <!-- Formulaire d'inscription -->
     <form @submit.prevent="register">
       <div class="form-group">
         <label for="email">Email:</label>
@@ -24,8 +25,8 @@
         <input type="text" v-model="phone" id="phone" required />
       </div>
       <button type="submit" class="submit-btn">S'inscrire</button>
+      <!-- Message d'erreur -->
       <p v-if="error" class="error-message">{{ error }}</p>
-      <!-- <h3 v-if="message" class="success-message">{{ message }}</h3> -->
       <p class="login-link">
         Déjà inscrit ? <router-link to="/login">Connectez-vous ici</router-link>
       </p>
@@ -34,6 +35,9 @@
 </template>
 
 <script>
+// Importer SweetAlert2
+import Swal from 'sweetalert2';
+
 export default {
   data() {
     return {
@@ -42,12 +46,14 @@ export default {
       first_name: '',
       last_name: '',
       phone: '',
-      error: null,
-      message: null, // Ajouter une propriété pour le message de succès
+      error: null, // Gestion des erreurs
+      message: null, // Message de succès (optionnel)
     };
   },
   methods: {
+    // Méthode d'inscription
     register() {
+      // Créer un objet avec les données d'inscription
       const registrationData = {
         email: this.email,
         password: this.password,
@@ -58,16 +64,26 @@ export default {
 
       console.log("Données d'inscription :", registrationData);
       
+      // Appeler l'action Vuex pour l'inscription
       this.$store
         .dispatch('register', registrationData)
         .then(() => {
-          this.message = 'Veuillez vérifier votre email pour activer votre compte.'; // Message à afficher après l'inscription
-          this.error = null; // Réinitialiser le message d'erreur
+          // Afficher une alerte SweetAlert2 pour le succès
+          Swal.fire({
+            title: 'Inscription réussie',
+            text: 'Veuillez vérifier votre email pour activer votre compte.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+          // Réinitialiser les erreurs
+          this.error = null;
         })
         .catch((err) => {
+          // Gérer l'erreur et l'afficher
           this.error = err.response?.data?.detail || 'Une erreur est survenue';
           console.error("Échec de l'inscription :", this.error);
-          this.message = null; // Réinitialiser le message de succès en cas d'erreur
+          // Réinitialiser le message de succès en cas d'erreur
+          this.message = null;
         });
     },
   },
@@ -75,6 +91,7 @@ export default {
 </script>
 
 <style scoped>
+/* Style de base pour la page d'inscription */
 .register {
   display: flex;
   flex-direction: column;
@@ -127,13 +144,9 @@ button.submit-btn:hover {
   background-color: #0056b3;
 }
 
+/* Styles pour les messages d'erreur */
 .error-message {
   color: #d9534f;
-  margin-top: 10px;
-}
-
-.success-message {
-  color: #5cb85c; /* Couleur pour le message de succès */
   margin-top: 10px;
 }
 

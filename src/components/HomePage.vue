@@ -151,7 +151,7 @@
       <h4>Nous contacter</h4>
       <ul>
         <li><i class="fas fa-envelope"></i> <a href="mailto:contact@gpmonde.com">contact@gpmonde.com</a></li>
-        <li><i class="fas fa-phone"></i> +123 456 7890</li>
+        <li><i class="fas fa-phone"></i> +221 761517642</li>
         <li><i class="fas fa-map-marker-alt"></i> Dakar, Sénégal</li>
       </ul>
     </div>
