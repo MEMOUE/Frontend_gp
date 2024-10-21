@@ -104,7 +104,7 @@ export default {
         this.$router.push('/programmes'); // Redirection après succès
       } catch (error) {
         console.error("Erreur lors de l'enregistrement du programme de voyage", error);
-        Swal.fire("Erreur", "Une erreur s'est produite lors de l'enregistrement du programme de voyage.", "error");
+        Swal.fire("Erreur", "Veuillez vous connecter ou vous reconnecter.", "error");
       }
     },
   },

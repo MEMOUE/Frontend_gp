@@ -114,7 +114,7 @@ export default {
         }
         this.$router.push('/api/emballages/');
       } catch (error) {
-        this.handleError(error, "Une erreur s'est produite lors de l'enregistrement de l'agence.");
+        this.handleError(error, "Veuillez vous connecter ou vous reconnecter.");
       }
     },
     handleError(error, defaultMessage) {

@@ -94,7 +94,7 @@ export default {
         }
         this.$router.push('/compagnies');
       } catch (error) {
-        this.handleError(error, "Une erreur s'est produite lors de l'enregistrement de la compagnie.");
+        this.handleError(error, "Veuillez vous connecter ou vous reconnecter.");
       } finally {
         this.loading = false;
       }

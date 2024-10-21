@@ -115,7 +115,7 @@ export default {
         this.$router.push('/transporteurs'); // Redirection après succès
       } catch (error) {
         console.error("Erreur lors de l'enregistrement du transporteur", error);
-        Swal.fire("Erreur", "Une erreur s'est produite lors de l'enregistrement du transporteur.", "error");
+        Swal.fire("Erreur", "Veuillez vous connecter ou vous reconnecter.", "error");
       }
     },
   },

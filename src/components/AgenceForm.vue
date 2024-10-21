@@ -95,7 +95,7 @@ export default {
         }
         this.$router.push('/agences');
       } catch (error) {
-        this.handleError("Une erreur s'est produite lors de l'enregistrement de l'agence.");
+        this.handleError("Veuillez vous connecter ou vous reconnecter.");
       }
     },
     handleError(message) {
