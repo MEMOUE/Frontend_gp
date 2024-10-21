@@ -40,9 +40,9 @@
   </div>
 </template>
 
-
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2'; // Importation de SweetAlert2
 
 export default {
   data() {
@@ -65,8 +65,12 @@ export default {
     submitBesoin() {
       const authToken = localStorage.getItem('access');
       if (!authToken) {
-        this.errorMessage = "Vous devez être connecté pour soumettre un besoin.";
-        return;
+        Swal.fire({
+          icon: 'error', // Icône d'erreur
+          title: 'Erreur',
+          text: 'Vous devez être connecté pour soumettre un besoin.', // Message d'erreur
+        });
+        return; // Arrêter la fonction ici
       }
 
       axios.post(
@@ -76,6 +80,7 @@ export default {
       )
         .then(response => {
           this.successMessage = response.data.message;
+          Swal.fire("SweetAlert2 is working!"); // Affichage de l'alerte de succès
           this.message = '';
           this.fetchNotifications(); // Rafraîchir les notifications
           this.errorMessage = '';
