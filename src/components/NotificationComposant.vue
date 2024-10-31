@@ -80,7 +80,7 @@ export default {
       )
         .then(response => {
           this.successMessage = response.data.message;
-          Swal.fire("SweetAlert2 is working!"); // Affichage de l'alerte de succès
+          Swal.fire("Publié avec succès!"); // Affichage de l'alerte de succès
           this.message = '';
           this.fetchNotifications(); // Rafraîchir les notifications
           this.errorMessage = '';
