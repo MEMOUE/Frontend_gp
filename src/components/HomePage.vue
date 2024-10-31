@@ -160,7 +160,7 @@
     <div class="footer-social">
       <h4>Suivez-nous</h4>
       <ul>
-        <li><a href="https://www.facebook.com/profile.php?id=100078016242655&mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61568254163082" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
         <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
         <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
         <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a></li>
