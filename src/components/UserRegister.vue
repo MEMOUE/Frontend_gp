@@ -1,31 +1,33 @@
 <template>
   <div class="register">
-    <!-- Section du titre -->
     <h1>Inscription</h1>
-    <!-- Formulaire d'inscription -->
     <form @submit.prevent="register">
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" v-model="email" id="email" required />
+        <p v-if="errors.email" class="error-message">{{ errors.email }}</p>
       </div>
       <div class="form-group">
         <label for="password">Mot de passe:</label>
         <input type="password" v-model="password" id="password" required />
+        <p v-if="errors.password" class="error-message">{{ errors.password }}</p>
       </div>
       <div class="form-group">
         <label for="first_name">Prénom:</label>
         <input type="text" v-model="first_name" id="first_name" required />
+        <p v-if="errors.first_name" class="error-message">{{ errors.first_name }}</p>
       </div>
       <div class="form-group">
         <label for="last_name">Nom:</label>
         <input type="text" v-model="last_name" id="last_name" required />
+        <p v-if="errors.last_name" class="error-message">{{ errors.last_name }}</p>
       </div>
       <div class="form-group">
         <label for="phone">Téléphone:</label>
         <input type="text" v-model="phone" id="phone" required />
+        <p v-if="errors.phone" class="error-message">{{ errors.phone }}</p>
       </div>
       <button type="submit" class="submit-btn">S'inscrire</button>
-      <!-- Message d'erreur -->
       <p v-if="error" class="error-message">{{ error }}</p>
       <p class="login-link">
         Déjà inscrit ? <router-link to="/login">Connectez-vous ici</router-link>
@@ -35,7 +37,6 @@
 </template>
 
 <script>
-// Importer SweetAlert2
 import Swal from 'sweetalert2';
 
 export default {
@@ -46,14 +47,56 @@ export default {
       first_name: '',
       last_name: '',
       phone: '',
-      error: null, // Gestion des erreurs
-      message: null, // Message de succès (optionnel)
+      error: null,
+      errors: {} // Pour stocker les erreurs spécifiques aux champs
     };
   },
   methods: {
-    // Méthode d'inscription
+    validateForm() {
+      this.errors = {};
+
+      // Validation de l'email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!this.email) {
+        this.errors.email = "L'email est requis.";
+      } else if (!emailPattern.test(this.email)) {
+        this.errors.email = "Veuillez entrer un email valide.";
+      }
+
+      // Validation du mot de passe
+      const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      if (!this.password) {
+        this.errors.password = "Le mot de passe est requis.";
+      } else if (!passwordPattern.test(this.password)) {
+        this.errors.password = "Le mot de passe doit comporter au moins 8 caractères, dont une majuscule, une minuscule et un chiffre.";
+      }
+
+      // Validation du prénom
+      if (!this.first_name) {
+        this.errors.first_name = "Le prénom est requis.";
+      }
+
+      // Validation du nom
+      if (!this.last_name) {
+        this.errors.last_name = "Le nom est requis.";
+      }
+
+      // Validation du téléphone
+      const phonePattern = /^[0-9]{10,}$/;
+      if (!this.phone) {
+        this.errors.phone = "Le téléphone est requis.";
+      } else if (!phonePattern.test(this.phone)) {
+        this.errors.phone = "Le numéro de téléphone doit contenir au moins 10 chiffres.";
+      }
+
+      // Retourne vrai si aucune erreur
+      return Object.keys(this.errors).length === 0;
+    },
     register() {
-      // Créer un objet avec les données d'inscription
+      if (!this.validateForm()) {
+        return;
+      }
+
       const registrationData = {
         email: this.email,
         password: this.password,
@@ -62,28 +105,20 @@ export default {
         phone: this.phone,
       };
 
-      console.log("Données d'inscription :", registrationData);
-      
-      // Appeler l'action Vuex pour l'inscription
       this.$store
         .dispatch('register', registrationData)
         .then(() => {
-          // Afficher une alerte SweetAlert2 pour le succès
           Swal.fire({
             title: 'Inscription réussie',
             text: 'Veuillez vérifier votre email pour activer votre compte.',
             icon: 'success',
             confirmButtonText: 'OK',
           });
-          // Réinitialiser les erreurs
           this.error = null;
         })
         .catch((err) => {
-          // Gérer l'erreur et l'afficher
           this.error = err.response?.data?.detail || 'Une erreur est survenue';
           console.error("Échec de l'inscription :", this.error);
-          // Réinitialiser le message de succès en cas d'erreur
-          this.message = null;
         });
     },
   },
@@ -91,7 +126,6 @@ export default {
 </script>
 
 <style scoped>
-/* Style de base pour la page d'inscription */
 .register {
   display: flex;
   flex-direction: column;
@@ -144,7 +178,6 @@ button.submit-btn:hover {
   background-color: #0056b3;
 }
 
-/* Styles pour les messages d'erreur */
 .error-message {
   color: #d9534f;
   margin-top: 10px;

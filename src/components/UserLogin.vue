@@ -5,6 +5,7 @@
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" v-model="email" id="email" required />
+        <p v-if="errors.email" class="error-message">{{ errors.email }}</p>
       </div>
       <div class="form-group">
         <label for="password">Mot de passe:</label>
@@ -19,6 +20,7 @@
             {{ showPassword ? 'Masquer' : 'Afficher' }}
           </button>
         </div>
+        <p v-if="errors.password" class="error-message">{{ errors.password }}</p>
       </div>
       <button type="submit" class="submit-btn">Se connecter</button>
       <p v-if="error" class="error-message">{{ error }}</p>
@@ -39,11 +41,35 @@ export default {
       email: '',
       password: '',
       error: null,
-      showPassword: false, // État pour afficher ou masquer le mot de passe
+      showPassword: false,
+      errors: {} // Stockage des erreurs spécifiques aux champs
     };
   },
   methods: {
+    validateForm() {
+      this.errors = {};
+
+      // Validation de l'email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!this.email) {
+        this.errors.email = "L'email est requis.";
+      } else if (!emailPattern.test(this.email)) {
+        this.errors.email = "Veuillez entrer un email valide.";
+      }
+
+      // Validation du mot de passe
+      if (!this.password) {
+        this.errors.password = "Le mot de passe est requis.";
+      }
+
+      // Retourne vrai si aucune erreur
+      return Object.keys(this.errors).length === 0;
+    },
     login() {
+      if (!this.validateForm()) {
+        return;
+      }
+
       this.$store
         .dispatch('login', { email: this.email, password: this.password })
         .then(() => {
