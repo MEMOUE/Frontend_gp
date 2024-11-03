@@ -68,7 +68,7 @@ export default {
       if (!this.password) {
         this.errors.password = "Le mot de passe est requis.";
       } else if (!passwordPattern.test(this.password)) {
-        this.errors.password = "Le mot de passe doit comporter au moins 8 caractères, dont une majuscule, une minuscule et un chiffre.";
+        this.errors.password = "Le mot de passe doit comporter au moins 8 caractères, dont majuscule, minuscule et chiffre.";
       }
 
       // Validation du prénom

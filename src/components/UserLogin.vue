@@ -42,7 +42,7 @@ export default {
       password: '',
       error: null,
       showPassword: false,
-      errors: {} // Stockage des erreurs spécifiques aux champs
+      errors: {}, // Stockage des erreurs spécifiques aux champs
     };
   },
   methods: {
@@ -76,7 +76,12 @@ export default {
           this.$router.push('/'); // Redirection vers la page d'accueil après connexion
         })
         .catch((err) => {
-          this.error = err.response?.data?.detail || 'Une erreur est survenue'; // Affiche l'erreur
+          // Vérifie si le message d'erreur provient d'une mauvaise authentification
+          if (err.response && err.response.status === 401) {
+            this.error = "Email ou mot de passe incorrect."; // Message d'erreur spécifique
+          } else {
+            this.error = err.response?.data?.detail || 'Une erreur est survenue'; // Autres erreurs
+          }
         });
     },
     togglePasswordVisibility() {
