@@ -9,6 +9,9 @@
     
     <div class="services-container">
       <div class="services">
+        <router-link to="/programmes" class="btn btn-success d-flex align-items-center">
+          <i class="fas fa-check-circle"> </i> GP en cours
+        </router-link>
         <router-link to="/compagnies" class="service-button">
           <i class="fas fa-globe"></i> Compagnie de Transport
         </router-link>

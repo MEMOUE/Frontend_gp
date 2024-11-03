@@ -117,7 +117,7 @@ export default {
           this.error = null;
         })
         .catch((err) => {
-          this.error = err.response?.data?.detail || 'Une erreur est survenue';
+          this.error = err.response?.data?.detail || 'e-mail deja utilisé';
           console.error("Échec de l'inscription :", this.error);
         });
     },
