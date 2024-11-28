@@ -71,6 +71,11 @@ export default {
         Swal.fire("Erreur", "Impossible de récupérer les données du programme de voyage.", "error");
       }
     },
+
+    formatDate(date) {
+      return new Date(date).toLocaleDateString('fr-FR'); // Format de date amélioré
+    },
+    
     handleFileUpload(event) {
       this.programmeVoyage.logo = event.target.files[0]; // Gestion du fichier
     },

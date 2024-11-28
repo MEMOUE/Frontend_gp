@@ -24,7 +24,7 @@
     methods: {
       async requestPasswordReset() {
         try {
-          await axios.post('https://memko.pythonanywhere.com/api/password_reset/', { email: this.email });
+          await axios.post('https://memko.pythonanywhere.com/api/password_reset/', { email: this.email }); // https://memko.pythonanywhere.com
           this.successMessage = 'Email de réinitialisation envoyé. Veuillez vérifier votre boîte mail.';
           this.errorMessage = '';
         } catch (error) {

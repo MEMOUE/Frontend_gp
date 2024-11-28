@@ -25,7 +25,7 @@ export default {
   methods: {
     async verifyEmail(token) {
       try {
-        const response = await axios.get(`https://memko.pythonanywhere.com/verify-email/${token}/`);
+        const response = await axios.get(`https://memko.pythonanywhere.com/verify-email/${token}/`); // https://memko.pythonanywhere.com
         this.message = response.data.message;
         // Optionnel : Redirection après succès
         // this.$router.push('/login');

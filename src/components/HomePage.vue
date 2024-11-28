@@ -9,10 +9,10 @@
     
     <div class="services-container">
       <div class="services">
-        <router-link to="/programmes" class="btn btn-success d-flex align-items-center">
-          <i class="fas fa-check-circle"> </i> GP en cours
+        <router-link to="/programmes" class="service-button">
+          <i class="fas fa-check-circle "></i> GP en cours
         </router-link>
-        <router-link to="/compagnies" class="service-button">
+        <!-- <router-link to="/compagnies" class="service-button">
           <i class="fas fa-globe"></i> Compagnie de Transport
         </router-link>
         <router-link to="/transporteurs" class="service-button">
@@ -23,9 +23,9 @@
         </router-link>
         <router-link to="/agences" class="service-button">
           <i class="fas fa-ticket-alt"></i> Agence de Vente de Billets
-        </router-link>
+        </router-link> -->
         <router-link to="/publicite" class="service-button">
-          <i class="fas fa-bullhorn"></i> Publicité Bientôt Disponible
+          <i class="fas fa-bullhorn"></i> Publicité
       </router-link>
       
       </div>
@@ -53,20 +53,23 @@
       <h2 class="text-center">Nos Services</h2>
       <div class="services-list">
         <div class="service-item">
-          <i class="fas fa-globe"></i>
-          <h3>Compagnies de Transport</h3>
-          <p>Nous offrons des services de transport rapide et sécurisé pour vos colis à travers le monde, avec suivi en temps réel.</p>
-        </div>
-        <div class="service-item">
           <i class="fas fa-box"></i>
           <h3>Transporteur de Colis (GP)</h3>
           <p>Nous offrons des services complets de regroupement et de transport de produits, garantissant une livraison rapide et sécurisée à travers le monde, avec suivi en temps réel.</p>
         </div>
+
+        <div class="service-item">
+          <i class="fas fa-globe"></i>
+          <h3>Compagnies de Transport</h3>
+          <p>Nous offrons des services de transport rapide et sécurisé pour vos colis à travers le monde, avec suivi en temps réel.</p>
+        </div>
+        
         <div class="service-item">
           <i class="fas fa-plane"></i>
           <h3>Vente de Billets</h3>
           <p>Réservez vos billets de voyage avec nous et bénéficiez de tarifs compétitifs et d'un service client réactif.</p>
         </div>
+        
         <div class="service-item">
           <i class="fas fa-box-open"></i>
           <h3>Emballage Professionnel</h3>

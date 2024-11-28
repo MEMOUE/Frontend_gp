@@ -31,7 +31,7 @@
           return;
         }
         try {
-          await axios.post('https://memko.pythonanywhere.com/api/password_reset/confirm/', {
+          await axios.post('https://memko.pythonanywhere.com/api/password_reset/confirm/', { // https://memko.pythonanywhere.com
             uid: this.uid,
             token: this.token,
             new_password1: this.newPassword,

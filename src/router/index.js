@@ -21,7 +21,7 @@ import PasswordResetRequest from '@/components/PasswordResetRequest.vue';
 import PasswordResetConfirm from '@/components/PasswordResetConfirm.vue';
 import VerifyEmail from '@/components/VerifyEmail.vue';
 import PubliciteAnnonce from '@/components/PubliciteAnnonce.vue';
-
+import UserDashboard from '@/components/UserDashboard.vue';
 
 const routes = [
   { path: '/', component: HomePage },
@@ -35,11 +35,11 @@ const routes = [
   { path: '/emballages/', component: AgenceEmballageList },
   { path: '/emballages/create', component: AgenceEmballageForm },
   { path: '/emballages/edit/:id', component: AgenceEmballageForm },
-  { path: '/besoin-notifications', component: NotificationComposant},
-  { path: '/offres', component: OffreList},
-  { path: '/offres/create', component: OffreForm},
-  { path: '/offres/edit/:id', component: OffreForm},
-  
+  { path: '/besoin-notifications', component: NotificationComposant },
+  { path: '/offres', component: OffreList },
+  { path: '/offres/create', component: OffreForm },
+  { path: '/offres/edit/:id', component: OffreForm },
+  { path: '/dashboard', component: UserDashboard },
   {
     path: '/compagnies',
     name: 'CompagnieTransportList',
@@ -87,15 +87,15 @@ const routes = [
     component: ProgrammeVoyageForm,
   },
   {
-    path: '/password-reset',  // Route pour demander la réinitialisation du mot de passe
+    path: '/password-reset',
     name: 'PasswordResetRequest',
     component: PasswordResetRequest
   },
   {
-    path: '/password-reset-confirm',  // Route pour entrer un nouveau mot de passe
+    path: '/password-reset-confirm',
     name: 'PasswordResetConfirm',
     component: PasswordResetConfirm,
-    props: (route) => ({ uid: route.query.uid, token: route.query.token }) // Récupère le uid et token depuis l'URL
+    props: (route) => ({ uid: route.query.uid, token: route.query.token })
   },
   {
     path: '/verify-email/:token',
@@ -107,7 +107,6 @@ const routes = [
     name: 'PubliciteAnnonce',
     component: PubliciteAnnonce
   },
-
 ];
 
 const router = createRouter({

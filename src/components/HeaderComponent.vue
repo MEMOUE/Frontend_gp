@@ -51,36 +51,58 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="/">Home</a>
+                  <a class="nav-link" href="/">
+                    <i class="bi bi-house"></i> Home
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#our-services">Services</a>
+                  <a class="nav-link" href="/dashboard">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#about-us">About</a>
+                  <a class="nav-link" href="#our-services">
+                    <i class="bi bi-gear"></i> Services
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#contact">Contact Us</a>
+                  <a class="nav-link" href="#about-us">
+                    <i class="bi bi-info-circle"></i> About
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#contact">
+                    <i class="bi bi-envelope"></i> Contact Us
+                  </a>
                 </li>
                 <li class="nav-item" v-if="!user">
-                  <a class="nav-link" href="/login"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                  <a class="nav-link" href="/login">
+                    <i class="bi bi-box-arrow-in-right"></i> Login
+                  </a>
                 </li>
                 <li class="nav-item" v-if="!user">
-                  <a class="nav-link" href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+                  <a class="nav-link" href="/register">
+                    <i class="bi bi-person-plus"></i> Register
+                  </a>
                 </li>
                 <li class="nav-item" v-if="user">
-                  <a class="nav-link" @click="goToProfile"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+                  <a class="nav-link" @click="goToProfile">
+                    <i class="bi bi-person"></i> Profile
+                  </a>
                 </li>
                 <li class="nav-item" v-if="user">
-                  <a class="nav-link" @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
+                  <a class="nav-link" @click="logout">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                  </a>
                 </li>
                 <form class="form-inline">
                   <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="bi bi-search"></i>
                   </button>
                 </form>
               </ul>
             </div>
+            
           </nav>
         </div>
       </div>
@@ -117,10 +139,10 @@ export default {
   methods: {
     async fetchActiveOffersCount() {
       try {
-        const responseBesoins = await axios.get('https://memko.pythonanywhere.com/api/besoins-actives/');
+        const responseBesoins = await axios.get('https://memko.pythonanywhere.com/api/besoins-actives/'); //src/components/HeaderComponent.vue
         this.activeBesoinsCount = responseBesoins.data.count;
 
-        const responseOffres = await axios.get('https://memko.pythonanywhere.com/api/offres-actives/');
+        const responseOffres = await axios.get('https://memko.pythonanywhere.com//api/offres-actives/');
         this.activeOffersCount = responseOffres.data.count;
       } catch (error) {
         console.error('Erreur lors de la récupération des offres actives:', error);
