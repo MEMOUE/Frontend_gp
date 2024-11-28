@@ -101,35 +101,35 @@
     </section>
 
    <!-- Section Formulaire de Contact -->
-<section class="contact-form-section" id="contact">
-  <h2 class="text-center">Contact</h2>
-  <div class="contact-container">
-    <h2>Envoyez-nous un message</h2>
-    <form action="/envoyer-message" method="POST">
-      <div class="form-group">
-        <label for="name">Nom</label>
-        <input type="text" name="name" id="name" required />
-      </div>
+   <section class="contact-form-section" id="contact">
+    <h2 class="text-center">Contact</h2>
+    <div class="contact-container">
+      <h2>Envoyez-nous un message</h2>
+      <form @submit.prevent="sendMessage">
+        <div class="form-group">
+          <label for="name">Nom</label>
+          <input v-model="form.name" type="text" id="name" required />
+        </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required />
-      </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input v-model="form.email" type="email" id="email" required />
+        </div>
 
-      <div class="form-group">
-        <label for="subject">Sujet</label>
-        <input type="text" name="subject" id="subject" required />
-      </div>
+        <div class="form-group">
+          <label for="subject">Sujet</label>
+          <input v-model="form.subject" type="text" id="subject" required />
+        </div>
 
-      <div class="form-group">
-        <label for="message">Message</label>
-        <textarea name="message" id="message" rows="5" required></textarea>
-      </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea v-model="form.message" id="message" rows="5" required></textarea>
+        </div>
 
-      <button type="submit">Envoyer</button>
-    </form>
-  </div>
-</section>
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
+  </section>
 <!-- Section Footer -->
 <footer class="footer">
   <div class="footer-container">
@@ -186,6 +186,37 @@
 <script>
 
 export default {
+  data() {
+    return {
+      form: {
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      },
+    };
+  },
+  methods: {
+    async sendMessage() {
+      try {
+        const response = await fetch("https://memko.pythonanywhere.com/envoyer-message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(this.form),
+        });
+
+        if (response.ok) {
+          alert("Message envoyé avec succès !");
+          this.form = { name: "", email: "", subject: "", message: "" }; 
+        } else {
+          alert("Erreur lors de l'envoi du message.");
+        }
+      } catch (error) {
+        console.error("Erreur :", error);
+        alert("Une erreur s'est produite.");
+      }
+    },
+  },
   mounted() {
     const servicesContainer = this.$el.querySelector('.services-container');
     

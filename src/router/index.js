@@ -22,6 +22,7 @@ import PasswordResetConfirm from '@/components/PasswordResetConfirm.vue';
 import VerifyEmail from '@/components/VerifyEmail.vue';
 import PubliciteAnnonce from '@/components/PubliciteAnnonce.vue';
 import UserDashboard from '@/components/UserDashboard.vue';
+import FactureComponent from '@/components/FactureComponent.vue';
 
 const routes = [
   { path: '/', component: HomePage },
@@ -107,6 +108,11 @@ const routes = [
     name: 'PubliciteAnnonce',
     component: PubliciteAnnonce
   },
+  {
+    path: '/facture',
+    name: 'FactureComponent',
+    component: FactureComponent
+  }
 ];
 
 const router = createRouter({

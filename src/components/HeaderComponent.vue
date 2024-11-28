@@ -142,7 +142,7 @@ export default {
         const responseBesoins = await axios.get('https://memko.pythonanywhere.com/api/besoins-actives/'); //src/components/HeaderComponent.vue
         this.activeBesoinsCount = responseBesoins.data.count;
 
-        const responseOffres = await axios.get('https://memko.pythonanywhere.com//api/offres-actives/');
+        const responseOffres = await axios.get('https://memko.pythonanywhere.com/api/offres-actives/');
         this.activeOffersCount = responseOffres.data.count;
       } catch (error) {
         console.error('Erreur lors de la récupération des offres actives:', error);

@@ -8,9 +8,10 @@
           <li @click="selectMenu('settings')">
             <i class="fas fa-cog"></i> Settings
           </li>
-          <li @click="selectMenu('facture')">
+          <li @click="navigateToFacture">
             <i class="fas fa-file-invoice"></i> Facture
           </li>
+          
           <!-- <li @click="selectMenu('comments')">
             <i class="fas fa-comments"></i> Commentaires
           </li> -->
@@ -56,39 +57,7 @@
           </ul>
         </div>
   
-        <!-- Facture -->
-        <div v-if="selectedMenu === 'facture'">
-          <h1>Facture</h1>
-          <form @submit.prevent="generateInvoice">
-            <label for="clientName">Nom du Client :</label>
-            <input id="clientName" v-model="invoiceDetails.clientName" required />
-            
-            <label for="items">Détails des Articles :</label>
-            <textarea id="items" v-model="invoiceDetails.items" required></textarea>
-            
-            <button type="submit">Générer Facture</button>
-          </form>
-          <div v-if="invoice">
-            <h2>Facture Générée</h2>
-            <pre>{{ invoice }}</pre>
-            <button @click="downloadInvoice">Télécharger</button>
-            <button @click="shareInvoice">Partager</button>
-          </div>
-        </div>
-  
-        <!-- Commentaires -->
-        <!-- <div v-if="selectedMenu === 'comments'" class="border p-4 rounded shadow-sm mt-4">
-          <h1 class="text-center mb-4">Commentaires</h1>
-          <ul v-if="comments.length">
-            <li v-for="(comment, index) in comments" :key="index" class="mb-3">
-              <p>{{ comment.text }}</p>
-              <span @click="likeComment(index)" style="cursor: pointer;" class="btn btn-sm btn-outline-primary">
-                👍 {{ comment.likes }}
-              </span>
-            </li>
-          </ul>
-          <p v-else class="text-muted">Aucun commentaire pour le moment.</p>
-        </div> -->
+        
   
         <!-- Messages -->
         <div v-if="selectedMenu === 'messages'" class="border p-4 rounded shadow-sm mt-4">
@@ -159,6 +128,7 @@
   
   <script>
   import axios from '../axios'; // Assurez-vous d'avoir configuré axios
+  
 
 
   export default {
@@ -175,6 +145,10 @@
       };
     },
     methods: {
+
+      navigateToFacture() {
+      this.$router.push('/facture');
+    },
 
       async fetchProgrammes() {
       try {
@@ -210,11 +184,7 @@
         // Simulation des besoins
         this.needs = ['Besoin de nouveaux produits', 'Améliorer la qualité des services'];
       },
-      generateInvoice() {
-        this.invoice = {
-          client: this.invoiceDetails.clientName,
-          items: this.invoiceDetails.items,
-        };
+      
       },
       downloadInvoice() {
         console.log('Télécharger la facture');
@@ -226,7 +196,7 @@
         this.comments[index].likes += 1;
       }
     }
-  };
+  
   </script>
   
   <style scoped>
