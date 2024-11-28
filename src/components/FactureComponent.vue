@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="contenaire m-5 p-2">
       <h1>Générer une Facture</h1>
       <form @submit.prevent="generatePDF">
         <!-- Sélection du Programme de Voyage -->
