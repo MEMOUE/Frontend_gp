@@ -46,8 +46,9 @@ export default {
     };
   },
   methods: {
+    // Fonction pour valider les champs du formulaire
     validateForm() {
-      this.errors = {};
+      this.errors = {}; // Réinitialisation des erreurs à chaque soumission
 
       // Validation de l'email
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -65,6 +66,8 @@ export default {
       // Retourne vrai si aucune erreur
       return Object.keys(this.errors).length === 0;
     },
+
+    // Fonction de connexion avec gestion des erreurs
     login() {
       if (!this.validateForm()) {
         return;
@@ -78,14 +81,18 @@ export default {
         .catch((err) => {
           // Vérifie si le message d'erreur provient d'une mauvaise authentification
           if (err.response && err.response.status === 401) {
-            this.error = "Email ou mot de passe incorrect."; // Message d'erreur spécifique
+            this.error = "L'email ou le mot de passe est incorrect. Veuillez réessayer."; // Message d'erreur spécifique
+          } else if (err.response && err.response.status === 500) {
+            this.error = "Une erreur interne du serveur est survenue. Veuillez réessayer plus tard."; // Erreur serveur
           } else {
-            this.error = err.response?.data?.detail || 'Une erreur est survenue'; // Autres erreurs
+            this.error = err.response?.data?.detail || "Une erreur inconnue est survenue."; // Autres erreurs
           }
         });
     },
+
+    // Fonction pour basculer la visibilité du mot de passe
     togglePasswordVisibility() {
-      this.showPassword = !this.showPassword; // Inverser l'état de visibilité du mot de passe
+      this.showPassword = !this.showPassword;
     },
   },
 };
