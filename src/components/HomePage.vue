@@ -6,12 +6,11 @@
       <p>Explorez nos services et profitez d'une expérience unique.</p>
     </div>
 
-    
-    <div class="services-container">
+    <!-- <div class="services-container">
       <div class="services">
         <router-link to="/programmes" class="service-button">
           <i class="fas fa-check-circle "></i> GP en cours
-        </router-link>
+        </router-link> -->
         <!-- <router-link to="/compagnies" class="service-button">
           <i class="fas fa-globe"></i> Compagnie de Transport
         </router-link>
@@ -24,11 +23,20 @@
         <router-link to="/agences" class="service-button">
           <i class="fas fa-ticket-alt"></i> Agence de Vente de Billets
         </router-link> -->
-        <router-link to="/publicite" class="service-button">
+        <!-- <router-link to="/publicite" class="service-button">
           <i class="fas fa-bullhorn"></i> Publicité
-      </router-link>
-      
+        </router-link>
       </div>
+    </div> -->
+
+    <!-- Section des actions -->
+    <div class="actions-container">
+      <router-link to="/programmes" class="action-button">
+        <i class="fas fa-plus-circle"></i> Publier Nouveau GP
+      </router-link>
+      <router-link to="/publicite" class="action-button">
+        <i class="fas fa-bullhorn"></i> Acheter une Pub
+      </router-link>
     </div>
 
     <!-- Section Qui sommes-nous -->
@@ -36,47 +44,26 @@
       <h2>Qui sommes-nous ?</h2>
       <p>
         GpMonde est une plateforme de mise en relation innovante entre différentes entités et clients. Notre mission est de rendre chaque expérience de transport et de service plus fluide, rapide et sécurisée.
-        
       </p>
     </section>
 
     <!-- Section des départs prévus -->
-<div class="departures-alert">
-  <router-link to="/programmes" class="departures-button">
-    <i class="fas fa-calendar-alt"></i> Départs Prévus en Cours
-  </router-link>
-</div>
-
-
-    <!-- Section Services -->
-    <section class="our-services" id="our-services">
-      <h2 class="text-center">Nos Services</h2>
-      <div class="services-list">
-        <div class="service-item">
-          <i class="fas fa-box"></i>
-          <h3>Transporteur de Colis (GP)</h3>
-          <p>Nous offrons des services complets de regroupement et de transport de produits, garantissant une livraison rapide et sécurisée à travers le monde, avec suivi en temps réel.</p>
-        </div>
-
-        <div class="service-item">
-          <i class="fas fa-globe"></i>
-          <h3>Compagnies de Transport</h3>
-          <p>Nous offrons des services de transport rapide et sécurisé pour vos colis à travers le monde, avec suivi en temps réel.</p>
-        </div>
-        
-        <div class="service-item">
-          <i class="fas fa-plane"></i>
-          <h3>Vente de Billets</h3>
-          <p>Réservez vos billets de voyage avec nous et bénéficiez de tarifs compétitifs et d'un service client réactif.</p>
-        </div>
-        
-        <div class="service-item">
-          <i class="fas fa-box-open"></i>
-          <h3>Emballage Professionnel</h3>
-          <p>Protégez vos biens avec notre service d'emballage professionnel qui garantit la sécurité pendant le transport.</p>
-        </div>
+    <div class="fixed-buttons">
+      <div class="departures-alert">
+        <router-link to="/programmes" class="departures-button">
+          <i class="fas fa-calendar-alt"></i> Départs Prévus en Cours
+        </router-link>
       </div>
-    </section>
+      <div class="assistant-button" @click="toggleContactOptions">
+        <i class="fas fa-headset"></i>
+        <span>Assistant</span>
+      </div>
+    </div>
+    <div v-if="showContactOptions" class="contact-options">
+      <a :href="whatsappLink" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+221761517642"><i class="fas fa-phone"></i> Téléphone</a>
+      <a href="mailto:contact@gpmonde.com"><i class="fas fa-envelope"></i> Email</a>
+    </div>
 
     <!-- Section Témoignages -->
     <section class="testimonials">
@@ -100,91 +87,88 @@
       </div>
     </section>
 
-   <!-- Section Formulaire de Contact -->
-   <section class="contact-form-section" id="contact">
-    <h2 class="text-center">Contact</h2>
-    <div class="contact-container">
-      <h2>Envoyez-nous un message</h2>
-      <form @submit.prevent="sendMessage">
-        <div class="form-group">
-          <label for="name">Nom</label>
-          <input v-model="form.name" type="text" id="name" required />
+    <!-- Section Formulaire de Contact -->
+    <section class="contact-form-section" id="contact">
+      <h2 class="text-center">Contact</h2>
+      <div class="contact-container">
+        <h2>Envoyez-nous un message</h2>
+        <form @submit.prevent="sendMessage">
+          <div class="form-group">
+            <label for="name">Nom</label>
+            <input v-model="form.name" type="text" id="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input v-model="form.email" type="email" id="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Sujet</label>
+            <input v-model="form.subject" type="text" id="subject" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea v-model="form.message" id="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit">Envoyer</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Section Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Section À propos -->
+        <div class="footer-about">
+          <h4>À propos de nous</h4>
+          <p>
+            GPMonde est une plateforme de gestion innovante qui aide à connecter le monde du transport. Notre mission est de faciliter les opérations des compagnies de transport avec des solutions numériques modernes.
+          </p>
         </div>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input v-model="form.email" type="email" id="email" required />
+        <!-- Section Liens rapides -->
+        <div class="footer-links">
+          <h4>Liens rapides</h4>
+          <ul>
+            <li><a href="#about-us">Accueil</a></li>
+            <li><a href="#about-us">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
         </div>
 
-        <div class="form-group">
-          <label for="subject">Sujet</label>
-          <input v-model="form.subject" type="text" id="subject" required />
+        <!-- Section Contact -->
+        <div class="footer-contact">
+          <h4>Nous contacter</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:contact@gpmonde.com">contact@gpmonde.com</a></li>
+            <li><i class="fas fa-phone"></i> +221 761517642</li>
+            <li><i class="fas fa-map-marker-alt"></i> Dakar, Sénégal</li>
+          </ul>
         </div>
 
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea v-model="form.message" id="message" rows="5" required></textarea>
+        <!-- Section Réseaux sociaux -->
+        <div class="footer-social">
+          <h4>Suivez-nous</h4>
+          <ul>
+            <li><a href="https://www.facebook.com/profile.php?id=61568254163082" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+          </ul>
         </div>
+      </div>
 
-        <button type="submit">Envoyer</button>
-      </form>
-    </div>
-  </section>
-<!-- Section Footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <!-- Section À propos -->
-    <div class="footer-about">
-      <h4>À propos de nous</h4>
-      <p>
-        GPMonde est une plateforme de gestion innovante qui aide à connecter le monde du transport. Notre mission est de faciliter les opérations des compagnies de transport avec des solutions numériques modernes.
-      </p>
-    </div>
-
-    <!-- Section Liens rapides -->
-    <div class="footer-links">
-      <h4>Liens rapides</h4>
-      <ul>
-        <li><a href="#about-us">Accueil</a></li>
-        <li><a href="#about-us">À propos</a></li>
-        <li><a href="#our-services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-
-    <!-- Section Contact -->
-    <div class="footer-contact">
-      <h4>Nous contacter</h4>
-      <ul>
-        <li><i class="fas fa-envelope"></i> <a href="mailto:contact@gpmonde.com">contact@gpmonde.com</a></li>
-        <li><i class="fas fa-phone"></i> +221 761517642</li>
-        <li><i class="fas fa-map-marker-alt"></i> Dakar, Sénégal</li>
-      </ul>
-    </div>
-
-    <!-- Section Réseaux sociaux -->
-    <div class="footer-social">
-      <h4>Suivez-nous</h4>
-      <ul>
-        <li><a href="https://www.facebook.com/profile.php?id=61568254163082" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-        <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
-        <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
-        <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2024 GPMonde. Tous droits réservés.</p>
-  </div>
-</footer>
-
-
+      <div class="footer-bottom">
+        <p>&copy; 2024 GPMonde. Tous droits réservés.</p>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -194,6 +178,8 @@ export default {
         subject: "",
         message: "",
       },
+      showContactOptions: false,
+      whatsappLink: "https://wa.me/221761517642",
     };
   },
   methods: {
@@ -216,23 +202,116 @@ export default {
         alert("Une erreur s'est produite.");
       }
     },
+    toggleContactOptions() {
+      this.showContactOptions = !this.showContactOptions;
+    },
   },
   mounted() {
     const servicesContainer = this.$el.querySelector('.services-container');
     
-    // Arrête le défilement si l'utilisateur survole la section
-    servicesContainer.addEventListener('mouseover', () => {
-      servicesContainer.querySelector('.services').style.animationPlayState = 'paused';
-    });
+    if (servicesContainer) {
+      // Arrête le défilement si l'utilisateur survole la section
+      servicesContainer.addEventListener('mouseover', () => {
+        servicesContainer.querySelector('.services').style.animationPlayState = 'paused';
+      });
 
-    // Relance le défilement lorsque l'utilisateur ne survole plus
-    servicesContainer.addEventListener('mouseout', () => {
-      servicesContainer.querySelector('.services').style.animationPlayState = 'running';
-    });
+      // Relance le défilement lorsque l'utilisateur ne survole plus
+      servicesContainer.addEventListener('mouseout', () => {
+        servicesContainer.querySelector('.services').style.animationPlayState = 'running';
+      });
+    }
   }
 };
-
-
 </script>
 
 <style scoped src="@/styles/home.css"></style>
+<style scoped>
+.assistant-button {
+  background: none;
+  color: #28a745;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.assistant-button:hover {
+  transform: scale(1.1);
+}
+
+.contact-options {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.contact-options a {
+  display: block;
+  padding: 15px;
+  color: #28a745;
+  text-decoration: none;
+  border-bottom: 1px solid #ddd;
+  transition: background-color 0.3s;
+}
+
+.contact-options a:last-child {
+  border-bottom: none;
+}
+
+.contact-options a:hover {
+  background-color: #f1f1f1;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.action-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+.fixed-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.departures-button {
+  background-color: #ffcc00;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.departures-button:hover {
+  background-color: #ff9900;
+}
+</style>

@@ -58,7 +58,7 @@ instance.interceptors.response.use(
 
       if (refreshToken) {
         try {
-          const response = await axios.post('https://memko.pythonanywhere.com//token/refresh/', {
+          const response = await axios.post('https://memko.pythonanywhere.com/token/refresh/', {
             refresh: refreshToken,
           });
 
