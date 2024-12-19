@@ -37,14 +37,19 @@
       </ul>
       <p v-else>Aucune notification</p>
     </div>
+    <FooterComponent />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Importation de SweetAlert2
+import FooterComponent from './FooterComponent.vue';
 
 export default {
+  components: {
+    FooterComponent
+  },
   data() {
     return {
       message: '',

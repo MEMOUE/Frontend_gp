@@ -3,7 +3,9 @@
     <!-- Section d'en-tête -->
     <div class="header-content">
       <h1>Bienvenue sur GpMonde</h1>
-      <p>Explorez nos services et profitez d'une expérience unique.</p>
+      <p v-for="(phrase, index) in phrases" :key="index" :class="{ active: activePhraseIndex === index }">
+        {{ phrase }}
+      </p>
     </div>
 
     <!-- <div class="services-container">
@@ -31,11 +33,11 @@
 
     <!-- Section des actions -->
     <div class="actions-container">
-      <router-link to="/programmes" class="action-button">
-        <i class="fas fa-plus-circle"></i> Publier Nouveau GP
+      <router-link to="/programmes/new" class="action-button">
+        <i class="fas fa-plus-circle"></i> Publier GP
       </router-link>
       <router-link to="/publicite" class="action-button">
-        <i class="fas fa-bullhorn"></i> Acheter une Pub
+        <i class="fas fa-bullhorn"></i> Acheter Pub
       </router-link>
     </div>
 
@@ -51,7 +53,7 @@
     <div class="fixed-buttons">
       <div class="departures-alert">
         <router-link to="/programmes" class="departures-button">
-          <i class="fas fa-calendar-alt"></i> Départs Prévus en Cours
+          <i class="fas fa-calendar-alt"></i> Départs en Cours
         </router-link>
       </div>
       <div class="assistant-button" @click="toggleContactOptions">
@@ -62,7 +64,7 @@
     <div v-if="showContactOptions" class="contact-options">
       <a :href="whatsappLink" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       <a href="tel:+221761517642"><i class="fas fa-phone"></i> Téléphone</a>
-      <a href="mailto:contact@gpmonde.com"><i class="fas fa-envelope"></i> Email</a>
+      <a href="mailto:gpmonde22@gmail.com"><i class="fas fa-envelope"></i> Email</a>
     </div>
 
     <!-- Section Témoignages -->
@@ -118,58 +120,18 @@
       </div>
     </section>
 
-    <!-- Section Footer -->
-    <footer class="footer">
-      <div class="footer-container">
-        <!-- Section À propos -->
-        <div class="footer-about">
-          <h4>À propos de nous</h4>
-          <p>
-            GPMonde est une plateforme de gestion innovante qui aide à connecter le monde du transport. Notre mission est de faciliter les opérations des compagnies de transport avec des solutions numériques modernes.
-          </p>
-        </div>
-
-        <!-- Section Liens rapides -->
-        <div class="footer-links">
-          <h4>Liens rapides</h4>
-          <ul>
-            <li><a href="#about-us">Accueil</a></li>
-            <li><a href="#about-us">À propos</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <!-- Section Contact -->
-        <div class="footer-contact">
-          <h4>Nous contacter</h4>
-          <ul>
-            <li><i class="fas fa-envelope"></i> <a href="mailto:contact@gpmonde.com">contact@gpmonde.com</a></li>
-            <li><i class="fas fa-phone"></i> +221 761517642</li>
-            <li><i class="fas fa-map-marker-alt"></i> Dakar, Sénégal</li>
-          </ul>
-        </div>
-
-        <!-- Section Réseaux sociaux -->
-        <div class="footer-social">
-          <h4>Suivez-nous</h4>
-          <ul>
-            <li><a href="https://www.facebook.com/profile.php?id=61568254163082" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2024 GPMonde. Tous droits réservés.</p>
-      </div>
-    </footer>
+    <!-- Include FooterComponent -->
+    <FooterComponent />
   </div>
 </template>
 
 <script>
+import FooterComponent from './FooterComponent.vue';
+
 export default {
+  components: {
+    FooterComponent
+  },
   data() {
     return {
       form: {
@@ -180,6 +142,12 @@ export default {
       },
       showContactOptions: false,
       whatsappLink: "https://wa.me/221761517642",
+      phrases: [
+        "Explorez nos services et profitez d'une expérience unique.",
+        "GpMonde, votre partenaire de confiance.",
+        "Des solutions innovantes pour vos besoins de transport.",
+      ],
+      activePhraseIndex: 0,
     };
   },
   methods: {
@@ -205,8 +173,14 @@ export default {
     toggleContactOptions() {
       this.showContactOptions = !this.showContactOptions;
     },
+    cyclePhrases() {
+      setInterval(() => {
+        this.activePhraseIndex = (this.activePhraseIndex + 1) % this.phrases.length;
+      }, 3000);
+    },
   },
   mounted() {
+    this.cyclePhrases();
     const servicesContainer = this.$el.querySelector('.services-container');
     
     if (servicesContainer) {
@@ -313,5 +287,38 @@ export default {
 
 .departures-button:hover {
   background-color: #ff9900;
+}
+
+.header-content {
+  position: relative;
+  text-align: center;
+  background-image: url('@/assets/image1.jpg');
+  background-size: cover;
+  background-position: center;
+  animation: backgroundAnimation 15s infinite;
+}
+
+.header-content p {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.header-content p.active {
+  opacity: 1;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-image: url('@/assets/image1.jpg');
+  }
+  33% {
+    background-image: url('@/assets/imagegpt1.png');
+  }
+  66% {
+    background-image: url('@/assets/imagegpt2.png');
+  }
+  100% {
+    background-image: url('@/assets/imagegpt3.png');
+  }
 }
 </style>

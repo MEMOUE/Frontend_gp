@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://memko.pythonanywhere.com/', //'https://memko.pythonanywhere.com/'     http://localhost:8000,  
+  baseURL: 'https://memko.pythonanywhere.com', //'https://memko.pythonanywhere.com/'     http://localhost:8000,  
   headers: {
     'Content-Type': 'application/json',
   },

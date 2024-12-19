@@ -30,10 +30,10 @@
         <label for="telephone" class="form-label">Téléphone</label>
         <input type="tel" v-model="programmeVoyage.telephone" class="form-control" placeholder="+XXX 12345678" id="telephone" required />
       </div>
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="logo" class="form-label">Logo</label>
         <input type="file" @change="handleFileUpload" class="form-control" id="logo" />
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-primary">{{ isEditing ? 'Modifier' : 'Ajouter' }}</button>
     </form>
   </div>
@@ -54,7 +54,7 @@ export default {
         pays_depart: '',
         pays_arrivee: '',
         telephone: '',
-        logo: null,
+       /*  logo: null, */
       },
       isEditing: false,
     };

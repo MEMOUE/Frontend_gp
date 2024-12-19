@@ -8,7 +8,7 @@
       <div v-for="programme in programmes" :key="programme.id" class="col-md-4 mb-4">
         <div class="card h-100">
           <!-- Logo of the Programme -->
-          <img v-if="programme.logo" :src="programme.logo" alt="Logo" class="card-img-top" />
+          <!-- <img v-if="programme.logo" :src="programme.logo" alt="Logo" class="card-img-top" /> -->
 
           <div class="card-body">
             <h5 class="card-title">{{ programme.titre }}</h5>
@@ -74,9 +74,11 @@ export default {
     async fetchProgrammes() {
       try {
         const response = await axios.get('/api/programmes/');
+        console.log('Fetched Programmes:', response.data); // Debugging line
         // Filtrer les programmes dont la date de départ n'est pas passée
         const currentDate = new Date();
         this.programmes = response.data.filter(programme => new Date(programme.date_depart) >= currentDate);
+        console.log('Filtered Programmes:', this.programmes); // Debugging line
       } catch (error) {
         this.errorMessage = 'Erreur lors de la récupération des programmes';
         console.error(this.errorMessage, error);

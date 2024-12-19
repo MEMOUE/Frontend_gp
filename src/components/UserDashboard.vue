@@ -24,7 +24,7 @@
           <li @click="selectMenu('needs')">
             <i class="fas fa-tasks"></i> Besoins
           </li>
-          <li @click="selectMenu('advertisement')">
+          <li @click="fetchPub('publicite')">
             <i class="fas fa-ad"></i> Publicité
           </li>
         </ul>
@@ -52,7 +52,7 @@
             </li>
             <li class="list-group-item d-flex align-items-center">
               <i class="fas fa-key fa-2x text-primary me-3"></i>
-              <a href="/profile/change-password" class="text-decoration-none text-dark">Changer de mot de passe</a>
+              <a href="/change-password" class="text-decoration-none text-dark">Changer de mot de passe</a>
             </li>
           </ul>
         </div>
@@ -70,58 +70,7 @@
           <p v-else class="text-muted">Pas de nouveaux messages.</p>
         </div>
   
-        <!-- Offres -->
-        <div v-if="selectedMenu === 'offers'" class="border p-4 rounded shadow-sm mt-4">
-          <h1 class="text-center mb-4">Offres</h1>
-          <p class="text-center">Consultez nos dernières offres.</p>
-          <ul v-if="offers.length" class="list-group">
-            <li v-for="(offer, index) in offers" :key="index" class="list-group-item">
-              {{ offer }}
-            </li>
-          </ul>
-          <p v-else class="text-muted text-center">Pas d'offres disponibles.</p>
-        </div>
-  
-        <!-- Besoins -->
-        <div v-if="selectedMenu === 'needs'" class="border p-4 rounded shadow-sm mt-4">
-          <h1 class="text-center mb-4">Besoins</h1>
-          <p class="text-center">Liste des besoins soumis.</p>
-          <ul v-if="needs.length" class="list-group">
-            <li v-for="(need, index) in needs" :key="index" class="list-group-item">
-              {{ need }}
-            </li>
-          </ul>
-          <p v-else class="text-muted text-center">Aucun besoin en attente.</p>
-        </div>
-  
-        <!-- Publicité -->
-        <div v-if="selectedMenu === 'advertisement'" class="border p-4 rounded shadow-sm mt-4">
-          <h1 class="text-center mb-4">Publicité</h1>
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <div class="card">
-                <img src="https://via.placeholder.com/600x300" class="card-img-top" alt="Publicité 1">
-                <div class="card-body">
-                  <h5 class="card-title">Offre Spéciale</h5>
-                  <p class="card-text">Profitez de notre offre spéciale à prix réduit. Ne manquez pas cette occasion!</p>
-                  <a href="#" class="btn btn-primary">En savoir plus</a>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-md-6 mb-4">
-              <div class="card">
-                <img src="https://via.placeholder.com/600x300" class="card-img-top" alt="Publicité 2">
-                <div class="card-body">
-                  <h5 class="card-title">Nouvelle Collection</h5>
-                  <p class="card-text">Découvrez notre nouvelle collection de produits en avant-première !</p>
-                  <a href="#" class="btn btn-info">Voir la collection</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p class="text-center text-muted mt-4">Restez informé de nos dernières publicités et promotions.</p>
-        </div>
+        
       </main>
     </div>
   </template>
@@ -167,6 +116,7 @@
         if (menu === 'messages') this.fetchMessages();
         if (menu === 'offers') this.fetchOffers();
         if (menu === 'needs') this.fetchNeeds();
+        if (menu === 'publicite') this.fetchPub();
       },
       fetchComments() {
         // Simulation des commentaires
@@ -178,20 +128,19 @@
       },
       fetchOffers() {
         // Simulation des offres
-        this.offers = ['Promotion 1 - 20% de réduction', 'Promotion 2 - Livraison gratuite'];
+        this.$router.push('/offres');
       },
       fetchNeeds() {
-        // Simulation des besoins
-        this.needs = ['Besoin de nouveaux produits', 'Améliorer la qualité des services'];
+        // Simulation des besoins  
+        this.$router.push('/besoin-notifications');
+      },
+      fetchPub() {
+        // Simulation des besoins  publicite
+        this.$router.push('/publicite');
       },
       
       },
-      downloadInvoice() {
-        console.log('Télécharger la facture');
-      },
-      shareInvoice() {
-        console.log('Partager la facture');
-      },
+      
       likeComment(index) {
         this.comments[index].likes += 1;
       }

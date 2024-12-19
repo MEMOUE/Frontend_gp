@@ -32,13 +32,13 @@
               <li class="nav-item mx-1">
                 <a class="nav-link text-danger" href="/besoin-notifications" style="font-size: 0.9rem;">
                   <i class="fas fa-bell" style="font-size: 1rem;"></i> Besoins
-                  <span class="badge bg-danger" style="font-size: 0.8rem;">{{ activeBesoinsCount }}</span>
+                  <span v-if="activeBesoinsCount > 0" class="badge bg-danger" style="font-size: 0.8rem;">{{ activeBesoinsCount }}</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link text-success" href="/offres" style="font-size: 0.9rem;">
                   <i class="fas fa-briefcase" style="font-size: 1rem;"></i> Offres
-                  <span class="badge bg-success" style="font-size: 0.8rem;">{{ activeOffersCount }}</span>
+                  <span v-if="activeOffersCount > 0" class="badge bg-success" style="font-size: 0.8rem;">{{ activeOffersCount }}</span>
                 </a>
               </li>
             </div>
@@ -60,11 +60,11 @@
                     <i class="bi bi-speedometer2"></i> Dashboard
                   </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="#our-services">
                     <i class="bi bi-gear"></i> Services
                   </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <a class="nav-link" href="#about-us">
                     <i class="bi bi-info-circle"></i> About
@@ -95,11 +95,11 @@
                     <i class="bi bi-box-arrow-right"></i> Logout
                   </a>
                 </li>
-                <form class="form-inline">
+                <!-- <form class="form-inline">
                   <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
                     <i class="bi bi-search"></i>
                   </button>
-                </form>
+                </form> -->
               </ul>
             </div>
             

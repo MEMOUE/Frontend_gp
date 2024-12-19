@@ -27,7 +27,13 @@
           <ul>
             <li><i class="fas fa-envelope"></i> <a href="mailto:contact@gpmonde.com">contact@gpmonde.com</a></li>
             <li><i class="fas fa-phone"></i> +123 456 7890</li>
-            <li><i class="fas fa-map-marker-alt"></i> Dakar, Sénégal</li>
+            <li><i class="fas fa-map-marker-alt"></i> Afrique <i class="fas fa-globe-africa"></i></li>
+            <li><i class="fas fa-map-marker-alt"></i> Asie <i class="fas fa-globe-asia"></i></li>
+            <li><i class="fas fa-map-marker-alt"></i> Europe <i class="fas fa-globe-europe"></i></li>
+            <li><i class="fas fa-map-marker-alt"></i> Amérique du Nord <i class="fas fa-globe-americas"></i></li>
+            <li><i class="fas fa-map-marker-alt"></i> Amérique du Sud <i class="fas fa-globe-americas"></i></li>
+            <li><i class="fas fa-map-marker-alt"></i> Océanie <i class="fas fa-globe"></i></li>
+            <li><i class="fas fa-map-marker-alt"></i> Antarctique <i class="fas fa-globe"></i></li>
           </ul>
         </div>
   
@@ -152,4 +158,3 @@
     font-size: 0.85rem;
   }
   </style>
-  
