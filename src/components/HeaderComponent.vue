@@ -8,7 +8,7 @@
             <a href="tel:+221784886752">
               <i class="fa fa-phone" aria-hidden="true"></i>
             </a>
-            <a href="mailto:memko021@gmail.com">
+            <a href="mailto:gpmonde22@gmail.com">
               <i class="fa fa-envelope" aria-hidden="true"></i>
             </a>
             <a href="#">
@@ -36,8 +36,8 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-success" href="/offres" style="font-size: 0.9rem;">
-                  <i class="fas fa-briefcase" style="font-size: 1rem;"></i> Offres
+                <a class="nav-link text-success" href="/programmes" style="font-size: 0.9rem;">
+                  <i class="fas fa-briefcase" style="font-size: 1rem;"></i> Offres Gp
                   <span v-if="activeOffersCount > 0" class="badge bg-success" style="font-size: 0.8rem;">{{ activeOffersCount }}</span>
                 </a>
               </li>
@@ -75,25 +75,24 @@
                     <i class="bi bi-envelope"></i> Contact Us
                   </a>
                 </li>
-                <li class="nav-item" v-if="!user">
-                  <a class="nav-link" href="/login">
-                    <i class="bi bi-box-arrow-in-right"></i> Login
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-person"></i> Compte
                   </a>
-                </li>
-                <li class="nav-item" v-if="!user">
-                  <a class="nav-link" href="/register">
-                    <i class="bi bi-person-plus"></i> Register
-                  </a>
-                </li>
-                <li class="nav-item" v-if="user">
-                  <a class="nav-link" @click="goToProfile">
-                    <i class="bi bi-person"></i> Profile
-                  </a>
-                </li>
-                <li class="nav-item" v-if="user">
-                  <a class="nav-link" @click="logout">
-                    <i class="bi bi-box-arrow-right"></i> Logout
-                  </a>
+                  <div class="dropdown-menu" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="/login" v-if="!user">
+                      <i class="bi bi-box-arrow-in-right"></i> Login
+                    </a>
+                    <a class="dropdown-item" href="/register" v-if="!user">
+                      <i class="bi bi-person-plus"></i> Register
+                    </a>
+                    <a class="dropdown-item" @click="goToProfile" v-if="user">
+                      <i class="bi bi-person"></i> Profile
+                    </a>
+                    <a class="dropdown-item" @click="logout" v-if="user">
+                      <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                  </div>
                 </li>
                 <!-- <form class="form-inline">
                   <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
@@ -122,6 +121,7 @@ export default {
       logo, // Définir le logo dans les données
       activeOffersCount: 0, // Initialiser à 0
       activeBesoinsCount: 0,
+      programmes: [], // Add this line to store filtered programmes
     };
   },
   computed: {
@@ -142,8 +142,11 @@ export default {
         const responseBesoins = await axios.get('https://memko.pythonanywhere.com/api/besoins-actives/'); //src/components/HeaderComponent.vue
         this.activeBesoinsCount = responseBesoins.data.count;
 
-        const responseOffres = await axios.get('https://memko.pythonanywhere.com/api/offres-actives/');
-        this.activeOffersCount = responseOffres.data.count;
+        const responseOffres = await axios.get('https://memko.pythonanywhere.com/api/programmes/');
+        const currentDate = new Date();
+        this.programmes = responseOffres.data.filter(programme => new Date(programme.date_depart) >= currentDate);
+        this.activeOffersCount = this.programmes.length;
+        console.log('Filtered Programmes:', this.programmes); // Debugging line
       } catch (error) {
         console.error('Erreur lors de la récupération des offres actives:', error);
       }

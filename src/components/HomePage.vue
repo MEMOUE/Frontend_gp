@@ -51,14 +51,14 @@
 
     <!-- Section des départs prévus -->
     <div class="fixed-buttons">
-      <div class="departures-alert">
-        <router-link to="/programmes" class="departures-button">
-          <i class="fas fa-calendar-alt"></i> Départs en Cours
-        </router-link>
-      </div>
       <div class="assistant-button" @click="toggleContactOptions">
         <i class="fas fa-headset"></i>
         <span>Assistant</span>
+      </div>
+      <div class="departures-alert" style="margin-left: auto;">
+        <router-link to="/programmes" class="departures-button">
+          <i class="fas fa-calendar-alt"></i> Départs en Cours
+        </router-link>
       </div>
     </div>
     <div v-if="showContactOptions" class="contact-options">
@@ -167,7 +167,7 @@ export default {
         }
       } catch (error) {
         console.error("Erreur :", error);
-        alert("Une erreur s'est produite.");
+        alert("Veuillez ressayer plus.");
       }
     },
     toggleContactOptions() {
@@ -210,6 +210,9 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
 }
 
 .assistant-button:hover {
@@ -219,7 +222,7 @@ export default {
 .contact-options {
   position: fixed;
   bottom: 70px;
-  right: 20px;
+  left: 20px;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -295,7 +298,7 @@ export default {
   background-image: url('@/assets/image1.jpg');
   background-size: cover;
   background-position: center;
-  animation: backgroundAnimation 15s infinite;
+  animation: backgroundAnimation 50s infinite; /* Slow down the animation to 30 seconds */
 }
 
 .header-content p {
@@ -312,13 +315,13 @@ export default {
     background-image: url('@/assets/image1.jpg');
   }
   33% {
-    background-image: url('@/assets/imagegpt1.png');
+    background-image: url('@/assets/imaged.webp');
   }
   66% {
-    background-image: url('@/assets/imagegpt2.png');
+    background-image: url('@/assets/imaged1.jpg');
   }
   100% {
-    background-image: url('@/assets/imagegpt3.png');
+    background-image: url('@/assets/imaged2.jpg');
   }
 }
 </style>
